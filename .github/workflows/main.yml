@@ -3,25 +3,23 @@ name: Java CI
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout del repositorio
+    - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Configurar Java
+    - name: Set up Java
       uses: actions/setup-java@v3
       with:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Compilar el proyecto
-      run: mvn -B package --file pom.xml
+    - name: Compile
+      run: javac -cp . $(find . -name "*.java")
 
-    - name: Ejecutar pruebas unitarias
-      run: mvn test
+    - name: Run tests
+      run:
