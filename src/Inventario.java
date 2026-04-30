@@ -1,21 +1,17 @@
-
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class Inventario {
 
-    private List<Producto> productos;
-
-    public Inventario() {
-        this.productos = new ArrayList<>();
-    }
+    private ArrayList<Producto> productos = new ArrayList<>();
 
     public void añadirProducto(Producto p) {
+        if (p.getCantidad() < 0) {
+            throw new IllegalArgumentException("No se pueden añadir productos con cantidad negativa");
+        }
         productos.add(p);
     }
 
-    public List<Producto> getProductos() {
+    public ArrayList<Producto> getProductos() {
         return productos;
     }
 

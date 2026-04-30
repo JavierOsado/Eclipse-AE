@@ -1,24 +1,12 @@
-
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 public class InventarioTest {
 
     @Test
-    void testCalcularValorInventario() {
-        Inventario inventario = new Inventario();
-        inventario.añadirProducto(new Producto("B2", "Ratón", 5, 15.0));
-
-        double valorEsperado = (10 * 20.0) + (5 * 15.0);
-        double valorObtenido = inventario.calcularValorInventario();
-
-        assertEquals(valorEsperado, valorObtenido);
-    }
-
-    @Test
     void testAñadirProducto() {
         Inventario inventario = new Inventario();
-        Producto p = new Producto("C3", "Monitor", 3, 150.0);
+        Producto p = new Producto("A1", "Teclado", 3, 25.0);
 
         inventario.añadirProducto(p);
 
@@ -28,12 +16,25 @@ public class InventarioTest {
     @Test
     void testBuscarProductoPorId() {
         Inventario inventario = new Inventario();
-        Producto p = new Producto("D4", "Impresora", 2, 120.0);
+        Producto p = new Producto("B1", "Impresora", 2, 150.0);
+
         inventario.añadirProducto(p);
 
-        Producto resultado = inventario.buscarProductoPorId("D4");
+        Producto resultado = inventario.buscarProductoPorId("B1");
 
         assertNotNull(resultado);
         assertEquals("Impresora", resultado.getNombre());
+    }
+
+    @Test
+    void testCalcularValorInventario() {
+        Inventario inventario = new Inventario();
+
+        inventario.añadirProducto(new Producto("A1", "Teclado", 3, 25.0)); // 75
+        inventario.añadirProducto(new Producto("B1", "Ratón", 4, 50.0));   // 200
+
+        double esperado = 275.0;
+
+        assertEquals(esperado, inventario.calcularValorInventario());
     }
 }
